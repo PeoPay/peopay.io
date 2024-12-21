@@ -1,4 +1,4 @@
-import { Mail, Github, Wallet } from 'lucide-react';
+import { Wallet } from 'lucide-react';
 
 export function Footer() {
   return (

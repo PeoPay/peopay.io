@@ -1,12 +1,12 @@
 {
-  "name": "peopay-core",
+  "name": "peopay.io",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.2",
   "type": "module",
   "description": "Empowering Communities Through Blockchain Unity",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PeoPay/PeoPay-Core.git"
+    "url": "git+https://github.com/PeoPay/peopay.io.git"
   },
   "keywords": [
     "blockchain",
@@ -16,12 +16,12 @@
     "ethereum",
     "polygon"
   ],
-  "author": "PeoPay Core Team",
+  "author": "_01x.arec1b0",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PeoPay/PeoPay-Core/issues"
+    "url": "https://github.com/PeoPay/peopay.io/issues"
   },
-  "homepage": "https://github.com/PeoPay/PeoPay-Core#readme",
+  "homepage": "https://github.com/PeoPay/peopay.io",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -81,10 +81,12 @@
   "devDependencies": {
     "@eslint/js": "^9.11.1",
     "@types/node": "^22.7.3",
+    "@types/debug": "^4.1.12",
     "@types/react": "^18.3.9",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "debug": "^4.3.4",
     "eslint": "^9.11.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",

@@ -1,47 +1,65 @@
-import { Menu, X } from 'lucide-react';
-import { useState, memo, useCallback } from 'react';
+import { memo } from 'react';
 import { Logo } from '@/components/brand/Logo';
-import { NavItems } from './NavItems';
-import { MobileMenu } from './MobileMenu';
-import { MenuButton } from './MenuButton';
-import { NAVIGATION } from '@/lib/constants/navigation';
+import { Button } from '@/components/ui/button';
+import { GithubIcon } from 'lucide-react';
 import { useScrollPosition } from '@/hooks/useScrollPosition';
-import { useKeyPress } from '@/hooks/useKeyPress';
+import { useInteractiveColor } from '@/hooks/useInteractiveColor';
 import { cn } from '@/lib/utils';
 
 export const Header = memo(function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const scrollPosition = useScrollPosition();
-
-  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
-  useKeyPress('Escape', closeMenu, [closeMenu]);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const isScrolled = scrollPosition > 0;
+  const { color, handleMouseMove, handleMouseLeave } = useInteractiveColor({
+    baseHue: 220,
+    baseLightness: 15,
+  });
 
   return (
     <header 
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-200",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled 
-          ? "bg-background/80 backdrop-blur-md shadow-sm" 
-          : "bg-background/50 backdrop-blur-sm"
+          ? "bg-background/80 backdrop-blur-lg shadow-lg py-3" 
+          : "bg-transparent py-8"
       )}
+      style={{
+        backgroundColor: isScrolled ? color : 'transparent',
+      }}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Logo />
-          <NavItems 
-            items={NAVIGATION.main} 
-            className="hidden md:flex items-center space-x-8" 
-          />
-          <MenuButton 
-            isOpen={isMenuOpen} 
-            onClick={toggleMenu} 
-          />
+        <div className="flex items-center justify-between">
+          <Logo className="transition-all duration-300 hover:scale-105" />
+          
+          <div className="flex items-center gap-6">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="rounded-full bg-background/50 hover:bg-primary/20 transition-all duration-300"
+              asChild
+            >
+              <a
+                href="https://github.com/PeoPay/PeoPay-Core"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-all duration-300 hover:scale-105"
+              >
+                <GithubIcon className="h-5 w-5" />
+              </a>
+            </Button>
+            
+            <Button 
+              className="rounded-full bg-primary/90 hover:bg-primary transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              asChild
+            >
+              <a href="#get-started">
+                Get Started
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
-      <MobileMenu items={NAVIGATION.main} isOpen={isMenuOpen} />
     </header>
   );
 });

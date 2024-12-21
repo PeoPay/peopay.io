@@ -1,15 +1,13 @@
 import { Hero } from '@/components/sections/Hero/Hero';
-import { Features } from '@/components/sections/Features/Features';
 import { Solution } from '@/components/sections/Solution/Solution';
-import { Education } from '@/components/sections/Education/Education';
+import { CombinedSection } from '@/components/sections/CombinedSection/CombinedSection';
 
 export function HomePage() {
   return (
     <>
       <Hero />
-      <Features />
       <Solution />
-      <Education />
+      <CombinedSection />
     </>
   );
 }

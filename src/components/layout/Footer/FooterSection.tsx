@@ -6,7 +6,7 @@ interface FooterSectionProps {
 export function FooterSection({ title, children }: FooterSectionProps) {
   return (
     <div>
-      <h3 className="font-semibold mb-4">{title}</h3>
+      <h3 className="font-semibold mb-4 text-primary/80 tracking-wide">{title}</h3>
       {children}
     </div>
   );
