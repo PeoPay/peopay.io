@@ -1,23 +1,22 @@
+import { memo } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 import { Header } from './Header/Header';
 import { Footer } from './Footer/Footer';
-import { OpeningEffect } from '../effects/OpeningEffect';
 import type { ReactNode } from 'react';
-import { InteractiveBackground } from '../effects/InteractiveBackground';
 
 interface LayoutProps {
   children: ReactNode;
 }
 
-export function Layout({ children }: LayoutProps) {
+export const Layout = memo(function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <OpeningEffect />
-      <InteractiveBackground />
       <Header />
-      <main className="flex-grow">
+      <main id="main-content" className="flex-grow pt-24" role="main">
         {children}
       </main>
       <Footer />
+      <Toaster />
     </div>
   );
-}
+});

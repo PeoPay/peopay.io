@@ -1,0 +1,27 @@
+{
+  "common": {
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success!",
+    "copied": "Copied to clipboard",
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "viewDocs": "View Documentation"
+  },
+  "nav": {
+    "home": "Home",
+    "features": "Features",
+    "solution": "Solution",
+    "education": "Education",
+    "roadSoFar": "Road So Far"
+  },
+  "wallet": {
+    "balance": "Balance",
+    "transactions": "Transactions",
+    "network": "Network",
+    "connect": "Connect Wallet",
+    "disconnect": "Disconnect"
+  }
+}

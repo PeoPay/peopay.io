@@ -5,8 +5,8 @@ interface FooterSectionProps {
 
 export function FooterSection({ title, children }: FooterSectionProps) {
   return (
-    <div>
-      <h3 className="font-semibold mb-4 text-primary/80 tracking-wide">{title}</h3>
+    <div className="space-y-6">
+      <h3 className="font-semibold tracking-wide text-lg">{title}</h3>
       {children}
     </div>
   );

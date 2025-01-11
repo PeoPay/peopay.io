@@ -3,12 +3,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { resources } from './educationData';
 import { ResourceCard } from './ResourceCard';
 import { ResourceContent } from './ResourceContent';
-import { useInView } from '@/hooks/useInView';
 import { cn } from '@/lib/utils';
 
 export const Education = memo(function Education() {
   const [activeResource, setActiveResource] = useState(resources[0].id);
-  const { ref, inView } = useInView({ threshold: 0.1 });
 
   return (
     <section id="education" className="relative py-20 overflow-hidden">
@@ -18,13 +16,7 @@ export const Education = memo(function Education() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
       </div>
       
-      <div 
-        ref={ref}
-        className={cn(
-          "container mx-auto px-4 transition-all duration-1000 transform",
-          inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        )}
-      >
+      <div className="container mx-auto px-4 animate-fade-in-up">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/60">
             Education Hub

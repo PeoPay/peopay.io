@@ -3,42 +3,39 @@ import { Transition } from '@/components/ui/headless/Transition';
 import { Portal } from '@/components/ui/headless/Portal';
 import type { NavItem } from '@/lib/types/navigation';
 
-interface MobileMenuProps {
-  items: NavItem[];
+export interface MobileMenuProps {
   isOpen: boolean;
+  onClose: () => void;
 }
 
-export function MobileMenu({ items, isOpen }: MobileMenuProps) {
-  return (
-    <Portal>
-      {/* Backdrop */}
-      <Transition
-        show={isOpen}
-        enter="transition-opacity duration-200"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity duration-150"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40" />
-      </Transition>
+export const MobileMenu = memo(function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  if (!isOpen) return null;
 
-      {/* Menu */}
-      <Transition
-        show={isOpen}
-        enter="transition-transform duration-200"
-        enterFrom="-translate-y-full"
-        enterTo="translate-y-0"
-        leave="transition-transform duration-150"
-        leaveFrom="translate-y-0"
-        leaveTo="-translate-y-full"
-      >
-        <div className="fixed top-16 left-0 right-0 bg-background/95 backdrop-blur-sm border-b z-50">
-          <div className="container mx-auto px-4 py-4">
-            <div className="flex flex-col space-y-4">
-              <MobileNavLinks items={items} />
-            </div>
+  return (
+    <div className="lg:hidden">
+      <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40" onClick={onClose} />
+      <div className="fixed top-[4.5rem] left-0 right-0 z-50 bg-background border-b border-border animate-in slide-in-from-top duration-300">
+        <div className="container px-4 py-4">
+          <nav className="space-y-2">
+            {NAVIGATION_ITEMS.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                className={cn(
+                  "block py-2 text-foreground transition-colors",
+                  "hover:text-primary"
+                )}
+                onClick={onClose}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </div>
+  );
+});
           </div>
         </div>
       </Transition>

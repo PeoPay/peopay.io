@@ -1,0 +1,88 @@
+@layer utilities {
+  /* Progressive reveal */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--animation-normal) var(--animation-easing-default),
+                transform var(--animation-normal) var(--animation-easing-default);
+    will-change: transform, opacity;
+  }
+
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered animations */
+  .stagger-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity var(--animation-normal) var(--animation-easing-default),
+                transform var(--animation-normal) var(--animation-easing-default);
+  }
+
+  .stagger-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Interactive elements */
+  .interactive {
+    transition: transform var(--animation-fast) var(--animation-easing-bounce),
+                opacity var(--animation-fast) var(--animation-easing-default);
+  }
+
+  .interactive:hover {
+    transform: scale(var(--scale-hover));
+  }
+
+  .interactive:active {
+    transform: scale(var(--scale-active));
+  }
+
+  /* Loading animations */
+  .loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .loading-spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Parallax */
+  .parallax {
+    transform: translateY(0);
+    transition: transform var(--animation-slow) var(--animation-easing-smooth);
+    will-change: transform;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal-on-scroll,
+    .stagger-item,
+    .interactive,
+    .parallax {
+      transition: none !important;
+      transform: none !important;
+      animation: none !important;
+    }
+  }
+}

@@ -20,7 +20,7 @@ export const ResourceCard = memo(function ResourceCard({
   return (
     <Card className={cn(
       "p-6 relative overflow-hidden transition-all duration-500",
-      "hover:shadow-xl hover:-translate-y-2 group",
+      "hover:shadow-xl hover:-translate-y-1 group",
       "border border-primary/10 hover:border-primary/30",
       isActive && "ring-1 ring-primary shadow-lg"
     )}>
@@ -28,11 +28,7 @@ export const ResourceCard = memo(function ResourceCard({
       
       <div className="relative space-y-4">
         <div className="relative inline-block">
-          <div className={cn(
-            "absolute inset-0 bg-primary/20 blur-xl rounded-full",
-            "transform scale-75 transition-all duration-500",
-            "group-hover:scale-125 group-hover:rotate-180"
-          )} />
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full transform scale-75 transition-transform duration-500 group-hover:scale-125" />
           <Icon className="relative h-12 w-12 text-primary transition-all duration-500 group-hover:scale-110 group-hover:rotate-6" />
         </div>
         
