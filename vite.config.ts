@@ -18,11 +18,10 @@ export default defineConfig({
     target: 'esnext',
     sourcemap: true,
     rollupOptions: {
-      external: ['isomorphic-ws'],
+      external: ['isomorphic-ws', 'ws'],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          ui: ['@/components/ui'],
           animations: ['@/components/animation'],
           web3: ['@wagmi/core', '@rainbow-me/rainbowkit', 'wagmi']
         }
@@ -30,7 +29,7 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: ['lucide-react', 'ws'],
     include: ['@walletconnect/legacy-client']
   }
 });
