@@ -35,7 +35,7 @@ export const RoadmapMilestone = memo(function RoadmapMilestone({
   return (
     <Card className={cn(
       "p-6 relative overflow-hidden transition-all duration-500",
-      "hover:shadow-xl hover:-translate-y-2 group",
+      "hover:shadow-xl hover:-translate-y-1 group",
       "border border-primary/10 hover:border-primary/30"
     )}>
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -43,19 +43,11 @@ export const RoadmapMilestone = memo(function RoadmapMilestone({
       <div className="relative space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
-            <StatusIcon className={cn(
-              "h-5 w-5 transition-all duration-300",
-              color,
-              "group-hover:scale-110 group-hover:rotate-12"
-            )} />
+            <StatusIcon className={cn("h-5 w-5", color)} />
             <span className="text-sm font-medium">{milestone.timeline}</span>
           </div>
           
-          <Badge className={cn(
-            "text-xs transition-all duration-300",
-            color, bgColor,
-            "group-hover:scale-105"
-          )}>
+          <Badge className={cn("text-xs", color, bgColor)}>
             {milestone.status.replace('-', ' ')}
           </Badge>
         </div>

@@ -1,32 +1,43 @@
-interface FooterLink {
-  label: string;
-  href: string;
-  icon?: React.ReactNode;
-  external?: boolean;
+import { memo } from 'react';
+import { cn } from '@/lib/utils';
+import type { FooterSection } from '@/lib/types/footer';
+
+interface FooterLinksProps extends FooterSection {
+  className?: string;
 }
 
-interface FooterLinksProps {
-  links: FooterLink[];
-}
-
-export function FooterLinks({ links }: FooterLinksProps) {
+export const FooterLinks = memo(function FooterLinks({
+  title,
+  links,
+  className,
+}: FooterLinksProps) {
   return (
-    <ul className="space-y-2">
-      {links.map((link) => (
-        <li key={link.href}>
-          <a
-            href={link.href}
-            className="text-muted-foreground hover:text-primary flex items-center"
-            {...(link.external && {
-              target: '_blank',
-              rel: 'noopener noreferrer',
-            })}
-          >
-            {link.icon && <span className="mr-2">{link.icon}</span>}
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div className={className}>
+      <h3 className="font-semibold text-lg mb-4">{title}</h3>
+      <ul className="space-y-3">
+        {links.map((link) => (
+          <li key={link.href}>
+            <a
+              href={link.href}
+              className={cn(
+                "text-muted-foreground hover:text-primary transition-colors",
+                "flex items-center gap-2 group"
+              )}
+              {...(link.external && {
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              })}
+            >
+              {link.icon && (
+                <span className="transition-transform group-hover:translate-x-1">
+                  {link.icon}
+                </span>
+              )}
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
-}
+});
