@@ -32,39 +32,6 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 201 96% 32%;
     --radius: 0.5rem;
-    
-    /* Spacing Scale */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    
-    /* Typography Scale */
-    --text-xs: 0.75rem;
-    --text-sm: 0.875rem;
-    --text-base: 1rem;
-    --text-lg: 1.125rem;
-    --text-xl: 1.25rem;
-    --text-2xl: 1.5rem;
-    --text-3xl: 1.875rem;
-    --text-4xl: 2.25rem;
-    
-    /* Animation Variables */
-    --animation-fast: 150ms;
-    --animation-normal: 300ms;
-    --animation-slow: 500ms;
-    --animation-extra-slow: 800ms;
-    
-    --animation-easing-default: cubic-bezier(0.4, 0, 0.2, 1);
-    --animation-easing-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    --animation-easing-smooth: cubic-bezier(0.45, 0, 0.55, 1);
-    
-    --scale-hover: 1.02;
-    --scale-active: 0.98;
   }
  
   .dark {
@@ -92,6 +59,40 @@
   }
 }
 
+@layer base {
+  * {
+    @apply border-border/10 box-border;
+  }
+  
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply font-sans text-foreground bg-background antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Improved focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+  
+  /* Better touch targets on mobile */
+  @media (max-width: 768px) {
+    button, 
+    a, 
+    input, 
+    select, 
+    textarea {
+      @apply min-h-[44px] min-w-[44px];
+    }
+  }
+}
+
 @layer utilities {
   .bg-grid-white {
     background-image: linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
@@ -99,7 +100,7 @@
   }
   
   .animate-fade-in-up {
-    animation: fadeInUp 1s ease-out forwards;
+    animation: fadeInUp 0.8s ease-out forwards;
   }
   
   .animate-float {
@@ -107,7 +108,62 @@
   }
   
   .animate-fade-in {
-    animation: fadeIn 1s ease-out forwards;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  /* Improved interactive states */
+  .interactive-hover {
+    @apply transition-all duration-200;
+  }
+  
+  @media (hover: hover) {
+    .interactive-hover {
+      @apply hover:scale-[1.02] active:scale-[0.98];
+    }
+  }
+  
+  /* Enhanced focus styles */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+  
+  /* Refined border styles */
+  .border-default {
+    @apply border border-border/10 hover:border-border/20 transition-colors;
+  }
+  
+  .border-hover {
+    @apply border border-border/10 hover:border-primary/20 transition-colors;
+  }
+  
+  .border-active {
+    @apply border border-primary/20 transition-colors;
+  }
+  
+  .border-focus {
+    @apply border border-primary/30 ring-2 ring-primary/20 transition-colors;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  .no-horizontal-scroll {
+    @apply max-w-[100vw] overflow-x-hidden;
+  }
+  
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-float,
+    .animate-fade-in {
+      animation: none !important;
+      transform: none !important;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -137,43 +193,5 @@
   }
   50% {
     transform: translateY(-20px);
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border/10 box-border;
-  }
-  body {
-    @apply font-sans text-foreground bg-background antialiased;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-bold tracking-tight;
-  }
-}
-
-@layer utilities {
-  .interactive-hover {
-    @apply transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
-  }
-  
-  .focus-ring {
-    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
-  }
-  
-  .border-default {
-    @apply border border-border/10 hover:border-border/20 transition-colors;
-  }
-  
-  .border-hover {
-    @apply border border-border/10 hover:border-primary/20 transition-colors;
-  }
-  
-  .border-active {
-    @apply border border-primary/20 transition-colors;
-  }
-  
-  .border-focus {
-    @apply border border-primary/30 ring-2 ring-primary/20 transition-colors;
   }
 }

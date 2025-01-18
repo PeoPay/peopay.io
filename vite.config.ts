@@ -8,28 +8,26 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       ws: 'isomorphic-ws'
-    },
+    }
   },
   define: {
     global: 'globalThis',
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   },
+  optimizeDeps: {
+    include: ['@rainbow-me/rainbowkit', 'wagmi', 'viem']
+  },
   build: {
     target: 'esnext',
     sourcemap: true,
     rollupOptions: {
-      external: ['isomorphic-ws', 'ws'],
+      external: ['ws'],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          animations: ['@/components/animation'],
-          web3: ['@wagmi/core', '@rainbow-me/rainbowkit', 'wagmi']
+          web3: ['wagmi', 'viem', '@rainbow-me/rainbowkit']
         }
       }
     }
-  },
-  optimizeDeps: {
-    exclude: ['lucide-react', 'ws'],
-    include: ['@walletconnect/legacy-client']
   }
 });
