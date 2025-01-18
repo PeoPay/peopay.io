@@ -1,49 +1,37 @@
-import { WagmiConfig, createClient, configureChains } from 'wagmi';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
-import { publicProvider } from '@wagmi/core/providers/public';
-import {
-  RainbowKitProvider,
-  getDefaultWallets,
-  darkTheme,
-  lightTheme,
-} from '@rainbow-me/rainbowkit';
-import { supportedChains } from '@/lib/config/chains';
-import { useTheme } from 'next-themes';
+import { WagmiConfig, createConfig, configureChains } from 'wagmi';
+import { mainnet, arbitrum } from 'viem/chains';
+import { publicProvider } from 'wagmi/providers/public';
+import { InjectedConnector } from 'wagmi/connectors/injected';
+import type { ReactNode } from 'react';
 
-const { chains, provider } = configureChains(
-  supportedChains,
-  [
-    publicProvider(),
-  ]
+const { chains, publicClient, webSocketPublicClient } = configureChains(
+  [mainnet, arbitrum],
+  [publicProvider()]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: 'PeoPay DeFi',
-  projectId: 'c8a52f1f5f234bb0f4c5a4f9c5a4f9c5',
-  chains,
-});
-
-const wagmiClient = createClient({
+const config = createConfig({
   autoConnect: true,
-  connectors,
-  provider,
+  connectors: [
+    new InjectedConnector({
+      chains,
+      options: {
+        name: 'MetaMask',
+        shimDisconnect: true,
+      },
+    }),
+  ],
+  publicClient,
+  webSocketPublicClient,
 });
 
 interface Web3ProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export function Web3Provider({ children }: Web3ProviderProps) {
-  const { theme } = useTheme();
-
   return (
-    <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={theme === 'dark' ? darkTheme() : lightTheme()}
-      >
-        {children}
-      </RainbowKitProvider>
+    <WagmiConfig config={config}>
+      {children}
     </WagmiConfig>
   );
 }

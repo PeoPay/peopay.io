@@ -1,5 +1,4 @@
-# PeoPay 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/c43dbc97-17be-444f-aa7a-27513defb909/deploy-status)](https://app.netlify.com/sites/peopay/deploys)
+# PeoPay Core
 
 Empowering Communities Through Blockchain Unity
 
