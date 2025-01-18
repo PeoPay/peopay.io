@@ -1,0 +1,39 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
+  VITE_CJS_IGNORE_WARNING = "true"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[dev]
+  command = "npm run dev"
+  port = 5173
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = """
+      default-src 'self' https:; \
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; \
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
+      img-src 'self' data: https: blob:; \
+      font-src 'self' https://fonts.gstatic.com; \
+      connect-src 'self' https: wss:; \
+      frame-src 'self' https:; \
+      media-src 'self' https:; \
+      object-src 'none'; \
+      frame-ancestors 'none';
+    """
