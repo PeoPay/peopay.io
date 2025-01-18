@@ -7,25 +7,18 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      ws: 'isomorphic-ws'
     }
   },
-  define: {
-    global: 'globalThis',
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-  },
-  optimizeDeps: {
-    include: ['@rainbow-me/rainbowkit', 'wagmi', 'viem']
-  },
   build: {
-    target: 'esnext',
+    outDir: 'dist',
     sourcemap: true,
+    chunkSizeWarningLimit: 1600,
     rollupOptions: {
-      external: ['ws'],
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
-          web3: ['wagmi', 'viem', '@rainbow-me/rainbowkit']
+          web3: ['wagmi', 'viem'],
+          ui: ['@radix-ui/react-dialog', '@radix-ui/react-tabs']
         }
       }
     }
