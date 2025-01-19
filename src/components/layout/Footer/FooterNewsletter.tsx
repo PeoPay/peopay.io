@@ -10,12 +10,12 @@ export const FooterNewsletter = memo(function FooterNewsletter() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     toast({
       title: "Thanks for subscribing!",
       description: "We'll keep you updated with our latest news.",
     });
-    
+
     setEmail('');
   };
 
@@ -28,24 +28,35 @@ export const FooterNewsletter = memo(function FooterNewsletter() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="relative">
+      <form 
+        name="newsletter" 
+        method="POST" 
+        data-netlify="true" 
+        onSubmit={handleSubmit} 
+        className="space-y-4"
+      >
+        <input type="hidden" name="form-name" value="newsletter" />
+
+        <div className="flex flex-col space-y-2">
+          <label htmlFor="email" className="text-sm font-medium">
+            Email Address
+          </label>
           <Input
+            id="email"
             type="email"
-            placeholder="Enter your email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="pl-4 pr-12 py-6"
             required
+            placeholder="Enter your email"
+            className="w-full"
           />
-          <Button 
-            type="submit"
-            size="icon"
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full hover:scale-105"
-          >
-            <Send className="h-4 w-4" />
-          </Button>
         </div>
+
+        <Button type="submit" className="flex items-center space-x-2">
+          <Send className="w-4 h-4" />
+          <span>Subscribe</span>
+        </Button>
       </form>
     </div>
   );
